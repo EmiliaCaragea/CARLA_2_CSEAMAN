@@ -27,11 +27,12 @@ CARLA_2_CSEAMAN/
 
 ```
 ## File structure
-The CAN datasets are stored as .log file. Each row inside the file consists of the following information:
 
-| Timestamp | Channel (`c`) | CAN ID (`id`) | Length (`l`) | Payload | 
-|:-------------|--------------:|----------------:|:--------------|-------------:|:--------|
-| 000.000000 | `can0` | `128` | `[8]` | `00 34 00 00 00 00 00 00` | 00 |
-| 000.000248 | `can0` | `168` | `[8]` | `00 00 00 01 00 00 00 00` | 00 |
-| 000.000498 | `can0` | `1A9` | `[8]` | `00 00 00 00 00 00 00 00` | 00 |
+The datasets are stored as `.log` files. Each row contains a timestamp, channel, CAN identifier, data length, and payload.
+
+| Timestamp (s) | Channel | CAN ID | Length (bytes) | Payload |
+|:--------------|:--------|:-------|:---------------|:--------|
+| `000.000000`  | `can0`  | `0x128` | 8 | `00 34 00 00 00 00 00 00` |
+| `000.000248`  | `can0`  | `0x168` | 8 | `00 00 00 01 00 00 00 00` |
+| `000.000498`  | `can0`  | `0x1A9` | 8 | `00 00 00 00 00 00 00 00` |
 
