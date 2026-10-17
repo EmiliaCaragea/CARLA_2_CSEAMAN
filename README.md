@@ -12,7 +12,7 @@ CAN bus traffic generated from CARLA simulation retransmitted by Raspberry Pi CA
 - **Vehicle physics:** CARLA default parameters
 - **CAN gateway:** Raspberry Pi using SocketCAN
 - **CAN bitrate:** 500 kbit/s
-- 
+  
 ## Folder structure
 
 ```text
@@ -23,7 +23,7 @@ CARLA_2_CSEAMAN/
     ├── random_injection/
     ├── random_modification/
     ├── replay/
-    └──  spoofing/
+    └── spoofing/
 
 ```
 ## File structure
@@ -36,3 +36,26 @@ The datasets are stored as `.log` files. Each row contains a timestamp, channel,
 | `000.000248`  | `can0`  | `0x168` | 8 | `00 00 00 01 00 00 00 00` |
 | `000.000498`  | `can0`  | `0x1A9` | 8 | `00 00 00 00 00 00 00 00` |
 
+### Attack Scenarios
+
+The dataset includes the following scenarios:
+
+| Folder | Description | Attack class |
+|---|---|---|
+| `no_attack` | CAN traffic recorded without adversarial activity | Normal |
+| `random_injection` | Injection CAN frames with legitimate ID and random payload | Random Injection |
+| `random_modification` | Injection CAN frames with legitimate ID and random signal byte modification | Random Modification |
+| `replay` | Retransmission of previously recorded CAN messages | Replay |
+| `spoofing` | Injection of CAN messages with selective modification of payload field (signal spoofing) | Spoofing |
+
+### Ground Truth Labeling
+
+To support supervised ML training and testing, CAN frames include a ground-truth attack indicator embedded in the payload.
+The indicator is stored in the last payload byte (byte index 7).
+
+The labeling convention is defined as follows:
+
+| Indicator | Binary label | Description |
+|---|---|---|
+| `0x00` | 0 | Benign CAN frame |
+| `0x01` | 1 | Malicious CAN frame |
